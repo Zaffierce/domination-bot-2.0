@@ -1,0 +1,31 @@
+{
+  "name": "domination-bot",
+  "version": "1.0.0",
+  "description": "The DomiNATION Discord Bot 2.0 was created for the [DomiNATION Gaming Community](https://domination-gaming.com/).",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/builders": "^0.12.0",
+    "@discordjs/rest": "^0.3.0",
+    "discord-api-types": "^0.26.1",
+    "discord.js": "^13.7.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "fs": "0.0.1-security",
+    "node": "^17.7.2",
+    "superagent": "^7.1.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zaffierce/domination-bot-2.0.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Zaffierce/domination-bot-2.0/issues"
+  },
+  "homepage": "https://github.com/Zaffierce/domination-bot-2.0#readme"
+}
