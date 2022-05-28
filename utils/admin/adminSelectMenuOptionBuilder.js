@@ -3,7 +3,7 @@ const arkRules = require('../../data/arkRules.json');
 const patreonRules = require('../../data/patreonRules.json');
 const serverAdmins = require('../../data/serverAdmins.json');
 const banRules = require('../../data/banRules.json');
-const config = require('../../config.json');
+// const config = require('../../config.json');
 
 const selectMenuOptionBuilder = async (opt) => {
   let selection = opt.split("_"); //add_discord -> "add", "discord"

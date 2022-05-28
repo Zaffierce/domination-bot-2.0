@@ -189,7 +189,8 @@ const modalBuilderEdit = async (opt, embed) => {
     switch(opt) {
       case 'discord':
         ruleLabel = `Discord Rule #${embed[0].value}`
-        ruleText = embed[1].value
+        ruleText = discordRules[selection[1]].ruleText
+        // ruleText = embed[1].value
         break;
       case 'ark':
         ruleLabel = `Ark Rule #${selection[1]}`

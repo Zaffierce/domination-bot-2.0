@@ -4,7 +4,8 @@ const arkRules = require('../../data/arkRules.json');
 const patreonRules = require('../../data/patreonRules.json');
 const serverAdmins = require('../../data/serverAdmins.json');
 const banRules = require('../../data/banRules.json');
-const config = require('../../config.json');
+require('dotenv').config();
+const { ARK_RULES_ID } = process.env;
 const fs = require("fs");
 
 const saveDataToFile = async (opt, embed) => {
@@ -183,7 +184,7 @@ function sleep(ms) {
 };
 
 async function editExistingMessage(bot, messageID, newRuleData) {
-  const channel = bot.channels.cache.get(config.ark_rules_id);
+  const channel = bot.channels.cache.get(ARK_RULES_ID);
   let fetchedMessage = await fetchMessageByID(channel, messageID);
   const newEmbed = new MessageEmbed()
     .setColor(fetchedMessage.embeds[0].color)
@@ -199,7 +200,7 @@ function fetchMessageByID(channel, messageID) {
 
 function fetchChannelMessageSize(channel, amount) {
   return new Promise(resolve => {
-    // const channel = bot.channels.cache.get(config.ark_rules_id);
+    // const channel = bot.channels.cache.get(ARK_RULES_ID);
     channel.messages.fetch({ limit: amount ? amount : 100 }).then(m => {
       resolve(m.size);
     });
@@ -255,7 +256,7 @@ async function saveRulesHandler(bot, opt, embed) {
 }
 
 async function postRulesHandler(bot) {
-  const channel = bot.channels.cache.get(config.ark_rules_id);
+  const channel = bot.channels.cache.get(ARK_RULES_ID);
   await fetchAndDelete(channel, null);
   await postRules(channel);
   // bot.emit('test', 'Finished posting the rules', true); //TODO: Test bot.emit capability for science.
@@ -264,7 +265,7 @@ async function postRulesHandler(bot) {
 }
 
 async function deleteMessagesHandler(bot, interaction, amountToDelete) {
-  const channel = bot.channels.cache.get(config.ark_rules_id);
+  const channel = bot.channels.cache.get(ARK_RULES_ID);
   await fetchAndDelete(channel, amountToDelete);
   return true;
 }

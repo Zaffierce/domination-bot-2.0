@@ -1,6 +1,6 @@
 const buttonBuilder = async (opt, bool) => {
   let selection = opt.split("_"); //add_discord -> "add", "discord"
-  console.log("adminButtonBuilderSelection", selection);
+  // console.log("adminButtonBuilderSelection", selection);
   switch(selection[0]) {
     case 'add':
       return [

@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const { fetchExistingRule, fetchNewRules } = require('./adminInteractionHandler.js');
-const config = require('../../config.json');
+// const config = require('../../config.json');
 
 const embedBuilder = async (opt, components) => {
 	const selection = opt.split("_"); //add_discord -> "add", "discord"
@@ -67,18 +67,18 @@ const embedBuilder = async (opt, components) => {
 					}
 					break;
 
-				case 'config':
-					switch(selection[1]) {
-						case 'main':
-							break;
-					}
-					embed.setTitle('Config Data')
-					Object.entries(config).forEach(([k, v]) => {
-						embed.addFields(
-							{ name: `${k}`, value: `${v ? v : '-'}` }
-						)
-					});
-					break;
+				// case 'config':
+				// 	switch(selection[1]) {
+				// 		case 'main':
+				// 			break;
+				// 	}
+				// 	embed.setTitle('Config Data')
+				// 	Object.entries(config).forEach(([k, v]) => {
+				// 		embed.addFields(
+				// 			{ name: `${k}`, value: `${v ? v : '-'}` }
+				// 		)
+				// 	});
+				// 	break;
 
 			}
 			break;

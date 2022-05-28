@@ -46,7 +46,7 @@ bot.ws.on('INTERACTION_CREATE', async (interaction) => {
   if (interaction.type != 5) return;
   interaction.type = 'MESSAGE_COMPONENT'
   interaction.componentType = 'MODAL'
-  console.log("wsInteractionCreate", interaction.type, interaction.componentType);
+  // console.log("wsInteractionCreate", interaction.type, interaction.componentType);
 
   const commandName = interaction.message.interaction.name;
   const command = bot.commands.get(commandName);
