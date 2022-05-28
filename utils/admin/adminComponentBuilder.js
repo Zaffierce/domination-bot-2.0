@@ -23,17 +23,6 @@ const components = async (opt, bool) => {
 						components: await buttonBuilder(selection[1])
 					}
 				
-				case 'config':
-					return {
-						type: 1,
-						components: [{
-							type: 3,
-							custom_id: "config",
-							options: await selectMenuOptionBuilder(`view_config`),
-							placeholder: "Please choose an option"
-						}]
-					}
-
 				default:
 					return {
 						type: 1,

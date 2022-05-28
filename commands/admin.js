@@ -1,8 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { saveDataToFile, checkIfExisting, deleteRule, postRulesHandler, saveRulesHandler } = require('../utils/admin/adminInteractionHandler.js');
 const { embedBuilder } = require('../utils/admin/adminEmbedBuilder.js');
-const { buttonBuilder } = require('../utils/admin/adminButtonBuilder.js');
-const { selectMenuOptionBuilder } = require('../utils/admin/adminSelectMenuOptionBuilder.js');
+// const { buttonBuilder } = require('../utils/admin/adminButtonBuilder.js');
+// const { selectMenuOptionBuilder } = require('../utils/admin/adminSelectMenuOptionBuilder.js');
 const { modalBuilder, modalBuilderAdd, modalBuilderEdit } = require('../utils/admin/adminModalBuilder.js');
 const { components } = require('../utils/admin/adminComponentBuilder.js');
 
@@ -23,6 +23,7 @@ const execute = async (interaction, bot) => {
 		switch(interaction.componentType) {
 			case 'SELECT_MENU':
 				selection = interaction.values[0].split("_");
+				// console.log(`Interaction: SELECT_MENU --- selection = ${selection} --- customId = ${interaction.customId}`)
 				// console.log("SELECT_MENU customId, values[0]", interaction.customId, interaction.values[0])
 				switch(interaction.customId) { //interaction.values[0] = enter_discord, enter_ark, enter_postrules, enter_config
 					case 'mainMenuSelection':
@@ -61,7 +62,7 @@ const execute = async (interaction, bot) => {
 						break;
 					
 					case 'edit': //edit_discord_2 customId_values
-						// console.log("admin SELECT_MENU edit selection[1]", selection[1]);
+						// console.log(`edit --- ${interaction.customId}_${interaction.values[0]}`);
 						switch(selection[1]) {
 							case 'main':
 								responseObject = {
@@ -150,10 +151,6 @@ const execute = async (interaction, bot) => {
 						}
 						break;
 
-					case 'exit':
-						//
-						break;
-
 					case 'return':
 						responseObject = {
 							type: 7,
@@ -213,7 +210,7 @@ const execute = async (interaction, bot) => {
 						// console.log(`Original Rule #${origRuleNum} - Modal Rule #${ruleNum}`)
 						// console.log(origRuleText)
 						if (origRuleNum !== ruleNum) {
-							console.log("rule number was changed")
+							// console.log("rule number was changed")
 							responseObject = {
 								type: 7,
 								data: {

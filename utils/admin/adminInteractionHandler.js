@@ -264,7 +264,7 @@ async function postRulesHandler(bot) {
 }
 
 async function deleteMessagesHandler(bot, interaction, amountToDelete) {
-  const channel = bot.channels.cache.get(interaction.channelId);
+  const channel = bot.channels.cache.get(config.ark_rules_id);
   await fetchAndDelete(channel, amountToDelete);
   return true;
 }

@@ -64,15 +64,15 @@ const selectMenuOptionBuilder = async (opt) => {
             id: "968302841389264938"
           }
         },
-        {	
-          label: 'Config',
-          value: 'enter_config',
-          description: 'Choose this option to modify various config data',
-          emoji: {
-            name: "Zaff",
-            id: "456393493062090753"
-          }
-        },
+        // {	
+        //   label: 'Config',
+        //   value: 'enter_config',
+        //   description: 'Choose this option to modify various config data',
+        //   emoji: {
+        //     name: "Zaff",
+        //     id: "456393493062090753"
+        //   }
+        // },
     ]
   //view_discord
     case 'view':
@@ -128,15 +128,15 @@ const selectMenuOptionBuilder = async (opt) => {
           }
           break;
 
-        case 'config':
-          Object.entries(config).forEach(([k, v]) => {
-            options.push({
-              label: `${k}`,
-              value: `config_${k}`,
-              description: v ? v : '-'
-            });
-          });
-          break;
+        // case 'config':
+        //   Object.entries(config).forEach(([k, v]) => {
+        //     options.push({
+        //       label: `${k}`,
+        //       value: `config_${k}`,
+        //       description: v ? v : '-'
+        //     });
+        //   });
+        //   break;
       }
       options.push(
         {
