@@ -1,10 +1,10 @@
-const { Client, Collection, Intents } = require('discord.js');
+const { Client, Collection, Intents, MessageEmbed } = require('discord.js');
 
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_WEBHOOKS]});
 const config = require('./config.json');
 const { deleteAllCommands, deleteSingleCommand, getCommands, start } = require('./utils/commandHandler.js');
 require('dotenv').config();
-const { TOKEN } = process.env;
+const { TOKEN, ARK_NOTIFICATIONS_ID, ARK_TICKET_SUBMISSIONS } = process.env;
 
 bot.commands = new Collection();
 
@@ -68,7 +68,40 @@ bot.on('messageCreate', async (message) => {
         message.delete();
       }, 10000);
     });
-  }
+  };
+  if (message.channelId === ARK_NOTIFICATIONS_ID) {
+    const userID = message.content.split(',')[0].replace(/\D/g,'');
+    const ticketType = message.content.split(',')[1];
+    const ticketLink = message.content.split(',')[2];
+    try {
+      switch(ticketType) {
+        case ' UPDATE':
+          hlnaQuote = "Hello Survivor!  An Admin has left a note on your ticket!  Go check it out!"
+          break;
+        
+        case ' COMPLETED':
+          hlnaQuote = "G'day Survivor!  Just wanted to let you know that your ticket was completed!";
+          break;
+        
+        case ' CANCELLED':
+          hlnaQuote = 'Aw sorry Survivor, it seems your ticket was cancelled out!';
+          break;
+      }
+      const fetchedUser = await message.guild.members.fetch(userID);
+      const embed = new MessageEmbed()
+        .setColor('RED')
+        .setDescription(hlnaQuote)
+        .setTitle('DomiNATION Support Ticket Notifier')
+        .setURL(ticketLink)
+        .setThumbnail('https://cdn.discordapp.com/attachments/483968919804313600/778014605410697246/20201116164643_1.png')
+        .addFields({ name: '**Ticket Link**', value: ticketLink, inline: false })
+        .setTimestamp()
+        .setFooter({ text: 'Message sent on' })
+      fetchedUser.send({ embeds: [embed] });
+    } catch(e) {
+      bot.channels.cache.get(ARK_TICKET_SUBMISSIONS).send({ content: 'An error has occurred while sending ticket notification to user <@'+userID+'> ```'+e+'```'});
+    }
+  };
 });
 
 // bot.on('test', console.log); //TODO: Future bot.emit project
