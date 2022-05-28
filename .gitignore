@@ -226,6 +226,8 @@ $RECYCLE.BIN/
 
 # Custom
 ./data/*
+/data/*
+/data*
 ./dev/*
 /dev/*
 /dev*
