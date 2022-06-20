@@ -1,8 +1,9 @@
-const { Client, Collection, Intents, MessageEmbed } = require('discord.js');
+const { Client, Collection, Intents, MessageEmbed, } = require('discord.js');
 
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_WEBHOOKS]});
 const config = require('./config.json');
 const { deleteAllCommands, deleteSingleCommand, getCommands, start } = require('./utils/commandHandler.js');
+const { errorHandler } = require("./utils/errorHandler.js");
 require('dotenv').config();
 const { TOKEN, ARK_NOTIFICATIONS_ID, ARK_TICKET_SUBMISSIONS } = process.env;
 
@@ -37,8 +38,8 @@ bot.on('interactionCreate', async (interaction) =>  {
   try {
     await command.execute(interaction, bot);
   } catch (e) {
-    console.error(e);
-    await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+    const errMsgID = await errorHandler(e, interaction);
+    await interaction.reply({ content: 'An error has occurred, please report this to Zaff.\nError ID: ```'+errMsgID+'```', ephemeral: true });
   }
 });
 
@@ -46,7 +47,6 @@ bot.ws.on('INTERACTION_CREATE', async (interaction) => {
   if (interaction.type != 5) return;
   interaction.type = 'MESSAGE_COMPONENT'
   interaction.componentType = 'MODAL'
-  // console.log("wsInteractionCreate", interaction.type, interaction.componentType);
 
   const commandName = interaction.message.interaction.name;
   const command = bot.commands.get(commandName);
@@ -55,19 +55,17 @@ bot.ws.on('INTERACTION_CREATE', async (interaction) => {
   try {
     await command.execute(interaction, bot);
   } catch (e) {
-    console.error(e);
-    await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+    const errMsgID = await errorHandler(e, interaction);
+    await interaction.reply({ content: 'An error has occurred, please report this to Zaff.\nError ID: `'+errMsgID+'`', ephemeral: true });
   }
 });
 
 bot.on('messageCreate', async (message) => {
   if (message.content.startsWith(config.prefix)) {
-    return message.reply('Please use the new / command variant instead.').then(msg => { 
-      setTimeout(() => { 
-        msg.delete()
-        message.delete();
-      }, 10000);
-    });
+    const commandName = message.content.slice(1);
+    const command = bot.commands.get(commandName);
+    if (!command) return message.reply("I no longer support ! commands however I couldn't find a command like this, please type / to see the available commands.");
+    else return message.reply('Please use the new slash commands instead by typing `/'+commandName+'`');
   };
   if (message.channelId === ARK_NOTIFICATIONS_ID) {
     const userID = message.content.split(',')[0].replace(/\D/g,'');
@@ -103,13 +101,5 @@ bot.on('messageCreate', async (message) => {
     }
   };
 });
-
-// bot.on('test', console.log); //TODO: Future bot.emit project
-
-// bot.on('raw', async message => {
-//   console.log(message);
-// });
-
-bot.on('error', console.error); //TODO: Convert to errorHandler Function
 
 bot.login(TOKEN);
