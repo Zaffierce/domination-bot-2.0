@@ -97,7 +97,10 @@ bot.on('messageCreate', async (message) => {
         .setFooter({ text: 'Message sent on' })
       fetchedUser.send({ embeds: [embed] });
     } catch(e) {
-      bot.channels.cache.get(ARK_TICKET_SUBMISSIONS).send({ content: 'An error has occurred while sending ticket notification to user <@'+userID+'> ```'+e+'```'});
+      //TODO:  Pass this to an actual log
+      const Zaff = await message.guild.members.fetch('143840467312836609');
+      Zaff.send(`<@${userID}>, ${ticketType}, ${ticketLink}`)
+      Zaff.send('Error: `'+e+'`');
     }
   };
 });
