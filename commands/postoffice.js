@@ -12,6 +12,6 @@ module.exports = {
 			.setURL('https://docs.google.com/spreadsheets/d/1JBpMMLBX8QABlMcF3VC-nCnsERQIcCyHy8E3QFb2NM0/edit#gid=0')
 			.setColor('#3E82F7')
 			.setDescription("G'day Survivor!  Here's a list of Post Offices and Public Workshops here on Domi!  https://docs.google.com/spreadsheets/d/1JBpMMLBX8QABlMcF3VC-nCnsERQIcCyHy8E3QFb2NM0/edit#gid=0")
-		await interaction.reply({ embeds: [embed], ephemeral: true });
+		await interaction.reply({ embeds: [embed], ephemeral: false });
 	},
 };

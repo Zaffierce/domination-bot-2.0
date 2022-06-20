@@ -16,6 +16,6 @@ module.exports = {
         { name: "Relaunch Ark", value: "If Ark's open when you did this, restart the game.  When you're at the welcome screen on Ark, in the bottom right you may see a 'Downloading Event Map' text."},
         { name: "Join the Event Map", value: "To verify that this has successfully installed, try joining [DomiNATION #12 - Event Map](https://ark.spectrumdominus.com/server/12).  This map is also available to transfer from every server in our cluster, so you could also do this in game."}
       )
-		await interaction.reply({ embeds: [embed], ephemeral: true });
+		await interaction.reply({ embeds: [embed], ephemeral: false });
 	},
 };

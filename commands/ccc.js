@@ -18,6 +18,6 @@ module.exports = {
 				{name: "Note:", value: "To close the console, hit TAB two more times."}
 			)
 			.setImage("https://cdn.discordapp.com/attachments/480355364613783566/917901554282025040/rsvlFDZZU5.gif");
-		await interaction.reply({ embeds: [embed], ephemeral: true });
+		await interaction.reply({ embeds: [embed], ephemeral: false });
 	},
 };

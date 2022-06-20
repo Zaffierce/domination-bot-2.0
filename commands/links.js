@@ -18,6 +18,6 @@ module.exports = {
 				{ name: "Patreon Link", value: "[DomiNATION Patreon Link](https://domination-gaming.com/patreon) - Use this if you want to support our community" },
 				{ name: "Patreon Rewards Link", value: "[DomiNATION Patreon Rewards Website](https://rewards.domination-gaming.com/) - Use this to view and claim Patreon rewards." },
 			)
-		await interaction.reply({ embeds: [embed], ephemeral: true });
+		await interaction.reply({ embeds: [embed], ephemeral: false });
 	},
 };

@@ -20,6 +20,6 @@ module.exports = {
         { name: "**Can I host something that doesn't involve selling/trading?**", value: "Yes!  In the past, we have had mini-games setup during the YardSale which were super fun and unique!  Doing this should be approved by the [CC] and the Admin's, but we really encourage it as they are so much fun!" },
         { name: "**Something not covered here but you're curious about?**", value: "Contact Cowdog#1764 or anyone with the [CC] in their nickname for additional questions or queries." }
       )
-		await interaction.reply({ embeds: [embed], ephemeral: true });
+		await interaction.reply({ embeds: [embed], ephemeral: false });
 	},
 };

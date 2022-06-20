@@ -19,6 +19,6 @@ module.exports = {
 				{name: "**Step 3**", value: "Fill out the form completely and then submit the ticket!"},
 				{name: "**Step 4**", value: "Sit back and relax, the Admin's will reach out to you.  I'll even send you a DM when your ticket updates!"}
 			)
-		await interaction.reply({ embeds: [embed], ephemeral: true });
+		await interaction.reply({ embeds: [embed], ephemeral: false });
 	},
 };
