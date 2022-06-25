@@ -11,7 +11,7 @@ module.exports = {
 			.setAuthor({ name: 'DomiNATION Ark Breeding Community' })
 			.setColor("#F28500")
 			.setDescription(`G'day Survivor!  Wanna find some stronger dinosaurs to help you survive the Ark?  Then why don't ya check this list out.`)
-			.addField('Ark Breeders Sheet:','https://docs.google.com/spreadsheets/d/1n2NCf31kZidHCVNqViTPnJ1cKgKXFj6Mh2ADUHh5Rto/edit#gid=0', true)
+			.addField('Ark Breeders Sheet:','https://docs.google.com/spreadsheets/d/1yZXfdWVhpcpcwBQXirjLl-0mzFMCQsLeuhRg3M9ox2k/edit?usp=sharing', true)
 			.setThumbnail("https://www.dododex.com/media/creature/featherlight.png");
 		await interaction.reply({ embeds: [embed], ephemeral: false });
 	},
