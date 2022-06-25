@@ -188,7 +188,9 @@ async function editExistingMessage(bot, messageID, newRuleData) {
   let fetchedMessage = await fetchMessageByID(channel, messageID);
   const newEmbed = new MessageEmbed()
     .setColor(fetchedMessage.embeds[0].color)
-    .addFields({ name: newRuleData.title, value: newRuleData.description })
+    .setTitle(newRuleData.title)
+    .setDescription(newRuleData.description)
+    // .addFields({ name: newRuleData.title, value: newRuleData.description })
   await fetchedMessage.edit({embeds: [newEmbed]});
 }
 
@@ -328,28 +330,36 @@ async function postRules(channel) {
       switch(key) {
         case '0': //Discord
           embedBody.setColor('#0099FF')
-          embedBody.addFields({ name: `Discord Rule #${v.ruleNum}`, value: `${v.ruleText}` })
+          embedBody.setTitle(`Discord Rule #${v.ruleNum}`)
+          embedBody.setDescription(`${v.ruleText}`)
+          // embedBody.addFields({ name: `Discord Rule #${v.ruleNum}`, value: `${v.ruleText}` })
           fileName = discordRules
           filePath = 'data/discordRules.json'
           break;
         
         case '1': //Ark
           embedBody.setColor('#76FF33')
-          embedBody.addFields({ name: `Ark Rule #${v.ruleNum}`, value: `${v.ruleText}` })
+          embedBody.setTitle(`Ark Rule #${v.ruleNum}`)
+          embedBody.setDescription(`${v.ruleText}`)
+          // embedBody.addFields({ name: `Ark Rule #${v.ruleNum}`, value: `${v.ruleText}` })
           fileName = arkRules
           filePath = 'data/arkRules.json'
           break;
 
         case '2': //Patreon
           embedBody.setColor('#8500FF')
-          embedBody.addFields({ name: `Patreon Rule #${v.ruleNum}`, value: `${v.ruleText}` })
+          embedBody.setTitle(`Patreon Rule #${v.ruleNum}`)
+          embedBody.setDescription(`${v.ruleText}`)
+          // embedBody.addFields({ name: `Patreon Rule #${v.ruleNum}`, value: `${v.ruleText}` })
           fileName = patreonRules
           filePath = 'data/patreonRules.json'
           break;
 
         case '3': //Server Admins
           embedBody.setColor('#F6DD0F')
-          embedBody.addFields({ name: `Ark Server #${v.ruleNum}`, value: `${v.ruleText}` })
+          embedBody.setTitle(`Ark Server #${v.ruleNum}`)
+          embedBody.setDescription(`${v.ruleText}`)
+          // embedBody.addFields({ name: `Ark Server #${v.ruleNum}`, value: `${v.ruleText}` })
           fileName = serverAdmins
           filePath = 'data/serverAdmins.json'
           break;
