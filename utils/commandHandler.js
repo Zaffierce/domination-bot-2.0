@@ -136,6 +136,6 @@ module.exports = {
   deleteAllCommands,
   deployCommands,
   deploySingleCommand,
-  setAsAdminCommand,
+  // setAsAdminCommand,
   start
 }
