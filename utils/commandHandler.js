@@ -1,11 +1,11 @@
 // const { Client, Collection, Intents } = require('discord.js');
 // const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]});
 const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+const { Routes } = require('discord-api-types/v10');
 const fs = require("fs");
 require('dotenv').config();
 const { TOKEN, CLIENTID, GUILDID, MODERATOR_ROLE_ID } = process.env;
-const rest = new REST({ version: '9' }).setToken(TOKEN);
+const rest = new REST({ version: '10' }).setToken(TOKEN);
 
 const start = async (bot) => {
   const cmdsArr = [];
@@ -79,9 +79,9 @@ const deployCommands = async () => {
   return await rest.put(Routes.applicationGuildCommands(CLIENTID, GUILDID), { body: commands })
     .then((res) => { 
       for (i in res) {
-        if (res[i].default_permission === false) {
-          setAsAdminCommand(res[i].id, res[i].name);
-        }
+        // if (res[i].default_permission === false) {
+        //   setAsAdminCommand(res[i].id, res[i].name);
+        // }
         console.log(`/${res[i].name} has been registered with ID - ${res[i].id}`)
       };
       return res;
@@ -101,26 +101,27 @@ const deploySingleCommand = async (cmd) => {
     .catch(console.error);
 }
 
-const setAsAdminCommand = async (commandID, commandName) => {
-  const json = {
-    "permissions": [{
-      "id": MODERATOR_ROLE_ID,
-      "type": 1,
-      "permission": true
-    }]
-  }
+// const setAsAdminCommand = async (commandID, commandName) => {
+//   //TODO:  Rip, endpoint can no longer be used by bots.
+//   const json = {
+//     "permissions": [{
+//       "id": MODERATOR_ROLE_ID,
+//       "type": 1,
+//       "permission": true
+//     }]
+//   }
 
-  try {
-    return await rest.put(Routes.applicationCommandPermissions(CLIENTID, GUILDID, commandID), { body: json})
-    .then((res) => {
-      if (commandName) console.log(`/${commandName} has been flagged as an Admin only command.`);
-      else console.log(`/${commandID} has been updated to be an Admin only command.`);
-      return { status: 200, msg: "Successfully updated" };
-    })
-  } catch (e) {
-    return { status: e.status, msg: "ERROR" }
-  }
-}
+//   try {
+//     await rest.put(Routes.applicationCommandPermissions(CLIENTID, GUILDID, commandID), { body: json})
+//     .then((res) => {
+//       if (commandName) console.log(`/${commandName} has been flagged as an Admin only command.`);
+//       else console.log(`/${commandID} has been updated to be an Admin only command.`);
+//       return { status: 200, msg: "Successfully updated" };
+//     })
+//   } catch (e) {
+//     return { status: e.status, msg: "ERROR" }
+//   }
+// }
 
 const checkAllCommandPermissions = async () => {
   return await rest.get(Routes.guildApplicationCommandsPermissions(CLIENTID, GUILDID))
