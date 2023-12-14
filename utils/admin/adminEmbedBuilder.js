@@ -93,8 +93,6 @@ const embedBuilder = async (opt, components) => {
 		} else {
 			fetchedRule = await fetchExistingRule(`${selection[1]}_${selection[2]}`);
 		}
-		// console.log("editsel[]", selection)
-		// console.log("editcomp", components);
 		embed.setDescription(fetchedRule.ruleText)
 		switch(selection[1]) {
 			case 'discord':
@@ -130,10 +128,8 @@ const embedBuilder = async (opt, components) => {
 		break;
 
 		case 'add':
-			// console.log("addComponents", components)
 			ruleNum = components[0].components[0].value;
 			ruleText = components[1].components[0].value;
-			// console.log("ruleNum", ruleNum)
 			switch(selection[1]){
 				case 'discord':
 					embed.setTitle(`Discord Rule #${ruleNum}`)
@@ -141,16 +137,42 @@ const embedBuilder = async (opt, components) => {
 					embed.setThumbnail('https://lh3.googleusercontent.com/_4zBNFjA8S9yjNB_ONwqBvxTvyXYdC7Nh1jYZ2x6YEcldBr2fyijdjM2J5EoVdTpnkA=w256')
 					embed.setColor('#0099ff')
 					break;
+		
+				case 'ark':
+					embed.setTitle(`Ark Rule #${ruleNum}`)
+					embed.setThumbnail('https://cdn.discordapp.com/attachments/566853064967847946/957394614975881346/d9fw57a-9a18dcd6-60b0-4ca4-bfcf-062f226f037d.png')
+					embed.setDescription(ruleText)
+					embed.setColor('#76FF33')
+					break;
+	
+				case 'patreon':
+					embed.setTitle(`Patreon Rule #${ruleNum}`)
+					embed.setThumbnail('https://cdn.discordapp.com/attachments/480355364613783566/570192827699560458/pirate-dilo-2_1.png')
+					embed.setDescription(ruleText)
+					embed.setColor('#8500FF')
+					break;
+				
+				case 'ban':
+					embed.setTitle(`Ban Message #${ruleNum}`)
+					embed.setThumbnail('https://cdn.discordapp.com/attachments/566853064967847946/572723585840447499/ban-hammer-ol-512.png')
+					embed.setDescription(ruleText)
+					embed.setColor('#f44242')
+					break;
+
+				case 'serveradmin':
+					embed.setTitle(`Server Admin Listing for #${ruleNum}`)
+					embed.setDescription(ruleText)
+					embed.setThumbnail('https://cdn.discordapp.com/attachments/566853064967847946/570453800129658892/e4d52f4d69d7bba67e5fd70ffe26b70d.png')
+					embed.setColor('#F6DD0F')
+					break;
 			}
 			break;
 
 		case 'duplicate':
-			// console.log("addComponents", components)
 			ruleNum = components[0].components[0].value;
 			ruleText = components[1].components[0].value;
 			embed.setColor('RED')
 			embed.setThumbnail('https://cdn.discordapp.com/attachments/566853064967847946/970060421002326107/close.png')
-			// console.log("ruleNum", ruleNum)
 			switch(selection[1]){
 				case 'discord':
 					embed.setTitle(`Duplicate rule found.`)
@@ -160,8 +182,6 @@ const embedBuilder = async (opt, components) => {
 			break;
 
 		case 'delete':
-			// console.log("delete components", components)
-			// console.log("delete selection", selection)
 			embed.setColor('RED')
 			embed.setThumbnail('https://cdn.discordapp.com/attachments/566853064967847946/971185906985889812/unknown.png')
 			embed.setTitle('Confirm Deletion')
