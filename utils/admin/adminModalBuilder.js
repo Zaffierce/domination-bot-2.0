@@ -1,7 +1,8 @@
 const discordRules = require('../../data/discordRules.json');
 const arkRules = require('../../data/arkRules.json');
 const patreonRules = require('../../data/patreonRules.json');
-const serverAdmins = require('../../data/serverAdmins.json');
+const ARKAdmins = require('../../data/ARKAdmins.json');
+const ASAAdmins = require('../../data/ASAAdmins.json');
 const banRules = require('../../data/banRules.json');
 
 const modalBuilder = async (opt, embed) => { //['edit', 'discord', '1']
@@ -24,7 +25,11 @@ const modalBuilder = async (opt, embed) => { //['edit', 'discord', '1']
       break;
     case 'serveradmin':
       ruleNum = 'Server #:'
-      ruleLabel = 'Server Admin List:'
+      ruleLabel = 'ARK Admin List:'
+      break;
+    case 'serveradmin2':
+      ruleNum = 'Server #:'
+      ruleLabel = 'ASA Admin List:'
       break;
     case 'ban':
       ruleNum = "Ban Rule #:"
@@ -87,7 +92,11 @@ const modalBuilderAdd = async (opt) => {
       break;
     case 'serveradmin':
       ruleNum = 'Server #:'
-      ruleLabel = 'Server Admin List:'
+      ruleLabel = 'ARK Admin List:'
+      break;
+    case 'serveradmin2':
+      ruleNum = 'Server #:'
+      ruleLabel = 'ASA Admin List:'
       break;
     case 'ban':
       ruleNum = "Ban Rule #:"
@@ -147,7 +156,11 @@ const modalBuilderEdit = async (opt, embed) => {
         break;
       case 'serveradmin':
         ruleNum = 'Server #:'
-        ruleLabel = 'Server Admin List:'
+        ruleLabel = 'ARK Admin List:'
+        break;
+      case 'serveradmin2':
+        ruleNum = 'Server #:'
+        ruleLabel = 'ASA Admin List:'
         break;
       case 'ban':
         ruleNum = 'Ban Rule #:'
@@ -201,8 +214,12 @@ const modalBuilderEdit = async (opt, embed) => {
         ruleText = patreonRules[selection[1]].ruleText
         break;
       case 'serveradmin':
-        ruleLabel = `Server Admins for Server #${selection[1]}`
-        ruleText = serverAdmins[selection[1]].ruleText
+        ruleLabel = `ARK Admins for Server #${selection[1]}`
+        ruleText = ARKAdmins[selection[1]].ruleText
+        break;
+      case 'serveradmin2':
+        ruleLabel = `ASA Admins for Server #${selection[1]}`
+        ruleText = ASAAdmins[selection[1]].ruleText
         break;
       case 'ban':
         ruleLabel = `Ban Rule #${selection[1]}`

@@ -2,7 +2,8 @@ const { MessageEmbed } = require('discord.js');
 const discordRules = require('../../data/discordRules.json');
 const arkRules = require('../../data/arkRules.json');
 const patreonRules = require('../../data/patreonRules.json');
-const serverAdmins = require('../../data/serverAdmins.json');
+const ARKAdmins = require('../../data/ARKAdmins.json');
+const ASAAdmins = require('../../data/ASAAdmins.json');
 const banRules = require('../../data/banRules.json');
 require('dotenv').config();
 const { ARK_RULES_ID } = process.env;
@@ -35,8 +36,13 @@ const saveDataToFile = async (opt, embed) => {
       break;
 
     case 'serveradmin':
-      fileName = serverAdmins;
-      filePath = './data/serverAdmins.json';
+      fileName = ARKAdmins;
+      filePath = './data/ARKAdmins.json';
+      break;
+
+    case 'serveradmin2':
+      fileName = ASAAdmins;
+      filePath = './data/ASAAdmins.json';
       break;
   }
   ruleNum = embed.title.split("#")[1];
@@ -87,8 +93,13 @@ const fetchExistingRule = async (opt) => {
       break;
 
     case 'serveradmin':
-      fileName = serverAdmins;
-      filePath = './data/serverAdmins.json';
+      fileName = ARKAdmins;
+      filePath = './data/ARKAdmins.json';
+      break;
+
+    case 'serveradmin2':
+      fileName = ASAAdmins;
+      filePath = './data/ASAAdmins.json';
       break;
   }
   return fileName[selection[1]];
@@ -115,7 +126,11 @@ const checkIfExisting = async (opt, ruleNum) => { //discord, 3
       break;
 
     case 'serveradmin':
-      fileName = serverAdmins;
+      fileName = ARKAdmins;
+      break;
+
+    case 'serveradmin2':
+      fileName = ASAAdmins;
       break;
   }
   if (fileName[ruleNum]) return true
@@ -147,8 +162,13 @@ const deleteRule = async (opt, ruleNum) => {
       break;
 
     case 'serveradmin':
-      fileName = serverAdmins;
-      filePath = './data/serverAdmins.json';
+      fileName = ARKAdmins;
+      filePath = './data/ARKAdmins.json';
+      break;
+
+    case 'serveradmin2':
+      fileName = ASAAdmins;
+      filePath = './data/ASAAdmins.json';
       break;
   }
   try {
@@ -164,7 +184,7 @@ const deleteRule = async (opt, ruleNum) => {
 }
 
 const fetchNewRules = async () => {
-  let ruleArr = [discordRules, arkRules, patreonRules, serverAdmins, banRules];
+  let ruleArr = [discordRules, arkRules, patreonRules, ARKAdmins, ASAAdmins, banRules];
   let newRuleArr = [];
   const rules = Object.keys(ruleArr);
   rules.forEach((key, value) => {
@@ -283,7 +303,7 @@ async function postRules(channel) {
     .setTimestamp()
     .setFooter({ text: 'Posted on' })
 
-  let ruleArr = [discordRules, arkRules, patreonRules, serverAdmins, banRules];
+  let ruleArr = [discordRules, arkRules, patreonRules, ARKAdmins, ASAAdmins, banRules];
   const rules = Object.keys(ruleArr);
   rules.forEach((key) => {
     switch(key) {
@@ -315,7 +335,14 @@ async function postRules(channel) {
         embedHeader.setThumbnail('https://cdn.discordapp.com/attachments/566853064967847946/570453800129658892/e4d52f4d69d7bba67e5fd70ffe26b70d.png')
         break;
 
-      case '4': //Ban
+      case '4': //Server Admins
+        embedHeader.setColor('#F6DD0F')
+        embedHeader.setAuthor({ name: 'ASA Admin Tribe Names' })
+        embedHeader.setDescription(`The following is a full list of the current ASA admins and their tribes on each server.`)
+        embedHeader.setThumbnail('https://cdn.discordapp.com/attachments/566853064967847946/570453800129658892/e4d52f4d69d7bba67e5fd70ffe26b70d.png')
+        break;
+
+      case '5': //Ban
         embedHeader.setColor('#F44242')
         embedHeader.setAuthor({ name: 'DomiNATION Gaming Point System 2.0' })
         embedHeader.setDescription(`This is the guidelines by which the Admin's follow when issuing punishments.  This is public to make it known to all, so each punishment is fair and just.  Points are accumulated by breaking the rules, each violation of a rule gains a player(s) points depending on severity and times occured.  Punishments are handed down based on how many points a player(s) has, based on the following guide:`)
@@ -360,11 +387,20 @@ async function postRules(channel) {
           embedBody.setTitle(`Ark Server #${v.ruleNum}`)
           embedBody.setDescription(`${v.ruleText}`)
           // embedBody.addFields({ name: `Ark Server #${v.ruleNum}`, value: `${v.ruleText}` })
-          fileName = serverAdmins
-          filePath = 'data/serverAdmins.json'
+          fileName = ARKAdmins
+          filePath = 'data/ARKAdmins.json'
           break;
 
-        case '4': //Ban
+        case '4': //Server Admins
+        embedBody.setColor('#F6DD0F')
+        embedBody.setTitle(`ASA Server #${v.ruleNum}`)
+        embedBody.setDescription(`${v.ruleText}`)
+        // embedBody.addFields({ name: `Ark Server #${v.ruleNum}`, value: `${v.ruleText}` })
+        fileName = ASAAdmins
+        filePath = 'data/ASAAdmins.json'
+        break;
+
+        case '5': //Ban
           embedBody.setColor('#F44242')
           embedBody.setDescription(`${v.ruleText}`)
           fileName = banRules

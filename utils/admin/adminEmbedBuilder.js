@@ -44,7 +44,13 @@ const embedBuilder = async (opt, components) => {
 					break;
 
 				case 'serveradmin':
-					embed.setTitle('Server Admin Listing')
+					embed.setTitle('ARK Admin Listing')
+					embed.setThumbnail('https://cdn.discordapp.com/attachments/566853064967847946/570453800129658892/e4d52f4d69d7bba67e5fd70ffe26b70d.png')
+					embed.setColor('#F6DD0F')
+					break;
+
+				case 'serveradmin2':
+					embed.setTitle('ASA Admin Listing')
 					embed.setThumbnail('https://cdn.discordapp.com/attachments/566853064967847946/570453800129658892/e4d52f4d69d7bba67e5fd70ffe26b70d.png')
 					embed.setColor('#F6DD0F')
 					break;
@@ -93,6 +99,7 @@ const embedBuilder = async (opt, components) => {
 		} else {
 			fetchedRule = await fetchExistingRule(`${selection[1]}_${selection[2]}`);
 		}
+		console.log("adminEmbedBuilder fetchedRule", fetchedRule);
 		embed.setDescription(fetchedRule.ruleText)
 		switch(selection[1]) {
 			case 'discord':
@@ -120,7 +127,13 @@ const embedBuilder = async (opt, components) => {
 				break;
 
 			case 'serveradmin':
-				embed.setTitle(`Server Admin Listing for #${fetchedRule.ruleNum}`)
+				embed.setTitle(`ARK Admin Listing for #${fetchedRule.ruleNum}`)
+				embed.setThumbnail('https://cdn.discordapp.com/attachments/566853064967847946/570453800129658892/e4d52f4d69d7bba67e5fd70ffe26b70d.png')
+				embed.setColor('#F6DD0F')
+				break;
+
+			case 'serveradmin2':
+				embed.setTitle(`ASA Admin Listing for #${fetchedRule.ruleNum}`)
 				embed.setThumbnail('https://cdn.discordapp.com/attachments/566853064967847946/570453800129658892/e4d52f4d69d7bba67e5fd70ffe26b70d.png')
 				embed.setColor('#F6DD0F')
 				break;
@@ -160,7 +173,14 @@ const embedBuilder = async (opt, components) => {
 					break;
 
 				case 'serveradmin':
-					embed.setTitle(`Server Admin Listing for #${ruleNum}`)
+					embed.setTitle(`ARK Admin Listing for #${ruleNum}`)
+					embed.setDescription(ruleText)
+					embed.setThumbnail('https://cdn.discordapp.com/attachments/566853064967847946/570453800129658892/e4d52f4d69d7bba67e5fd70ffe26b70d.png')
+					embed.setColor('#F6DD0F')
+					break;
+
+				case 'serveradmin2':
+					embed.setTitle(`ASA Admin Listing for #${ruleNum}`)
 					embed.setDescription(ruleText)
 					embed.setThumbnail('https://cdn.discordapp.com/attachments/566853064967847946/570453800129658892/e4d52f4d69d7bba67e5fd70ffe26b70d.png')
 					embed.setColor('#F6DD0F')

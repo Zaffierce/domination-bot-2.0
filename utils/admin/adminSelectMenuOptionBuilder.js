@@ -1,7 +1,8 @@
 const discordRules = require('../../data/discordRules.json');
 const arkRules = require('../../data/arkRules.json');
 const patreonRules = require('../../data/patreonRules.json');
-const serverAdmins = require('../../data/serverAdmins.json');
+const ARKAdmins = require('../../data/ARKAdmins.json');
+const ASAAdmins = require('../../data/ASAAdmins.json');
 const banRules = require('../../data/banRules.json');
 // const config = require('../../config.json');
 
@@ -47,9 +48,18 @@ const selectMenuOptionBuilder = async (opt) => {
           }
         },
         {	
-          label: 'Server Admins',
+          label: 'ARK Admins',
           value: 'enter_serveradmin',
-          description: 'Choose this option to manage the Server Admin list',
+          description: 'Choose this option to manage the ARK Admin list',
+          emoji: {
+            name: "domi_adminstar",
+            id: "959890009786298498"
+          }
+        },
+        {	
+          label: 'ASA Admins',
+          value: 'enter_serveradmin2',
+          description: 'Choose this option to manage the ASA Admin list',
           emoji: {
             name: "domi_adminstar",
             id: "959890009786298498"
@@ -119,11 +129,21 @@ const selectMenuOptionBuilder = async (opt) => {
           break;
 
         case 'serveradmin':
-          for (let i in serverAdmins) {
+          for (let i in ARKAdmins) {
             options.push({
-              label: `Server #${serverAdmins[i].ruleNum}`,
-              value: `serveradmin_${serverAdmins[i].ruleNum}`,
-              description: serverAdmins[i].ruleText.length < 50 ? serverAdmins[i].ruleText : serverAdmins[i].ruleText.slice(0,50)+"..."
+              label: `Server #${ARKAdmins[i].ruleNum}`,
+              value: `serveradmin_${ARKAdmins[i].ruleNum}`,
+              description: ARKAdmins[i].ruleText.length < 50 ? ARKAdmins[i].ruleText : ARKAdmins[i].ruleText.slice(0,50)+"..."
+            });
+          }
+          break;
+
+        case 'serveradmin2':
+          for (let i in ASAAdmins) {
+            options.push({
+              label: `Server #${ASAAdmins[i].ruleNum}`,
+              value: `serveradmin2_${ASAAdmins[i].ruleNum}`,
+              description: ASAAdmins[i].ruleText.length < 50 ? ASAAdmins[i].ruleText : ASAAdmins[i].ruleText.slice(0,50)+"..."
             });
           }
           break;
